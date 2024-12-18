@@ -1,1 +1,1 @@
-This is automation framework is built by Playwright Java
+This is an automation framework is built using Playwright Java
