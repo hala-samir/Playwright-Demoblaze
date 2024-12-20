@@ -1,6 +1,8 @@
 package pages;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
+import com.microsoft.playwright.options.WaitForSelectorState;
 
 public class PageObjectManager {
     private Page page;
@@ -10,7 +12,13 @@ public class PageObjectManager {
     }
 
     public void clickButton(String locatorName){
+        page.waitForLoadState(LoadState.NETWORKIDLE);
+        page.waitForSelector(locatorName, new Page.WaitForSelectorOptions().setState(WaitForSelectorState.VISIBLE));
         page.locator(locatorName).click();
+    }
+
+    public void clickFirstMatchedButton(String locatorName){
+        page.locator(locatorName).first().click();
     }
 
     public void fillTextField(String locatorName, String text){
@@ -20,11 +28,20 @@ public class PageObjectManager {
     public String getPageTitle(){
         return page.title();
     }
+
     public String getPageURL(){
         return page.url();
     }
+
     public String getTextValue(String locator){
-        return page.textContent(locator);
+        page.waitForLoadState(LoadState.NETWORKIDLE);
+        return page.locator(locator).first().textContent();
     }
+
+    public void clickButtonByJavaScript(String selector){
+        page.waitForLoadState(LoadState.NETWORKIDLE);
+        page.evaluate("selector => document.querySelector(selector).click()", selector);
+    }
+
 }
 

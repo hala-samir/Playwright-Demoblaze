@@ -8,8 +8,10 @@ public class PlaywrightFactory {
     BrowserContext browserContext;
     Page page;
     String url = "https://www.demoblaze.com/";
+
     public Page initBrowser(String browserName){
         playwright = Playwright.create();
+        //condition to check the browser name that will launch
         switch (browserName.toLowerCase()){
             case "chrome":
                 browser =  playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
@@ -24,9 +26,11 @@ public class PlaywrightFactory {
                 System.out.println("Please, add a valid browser name");
                 break;
         }
+
         browserContext = browser.newContext();
         page = browserContext.newPage();
         page.navigate(url);
+
         return page;
     }
 }
