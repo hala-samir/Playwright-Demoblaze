@@ -12,7 +12,7 @@ public class HomePageTest extends TestBase{
     JSONReader jsonReader = new JSONReader();
 
     @Test
-    public void homePageTest(){
+    public void userCanSignUpSuccessfully(){
         homePage = new HomePage(page);
         homePage.clickSignUpBtn();
         homePage.fillUsernameAndPassword();
@@ -20,7 +20,7 @@ public class HomePageTest extends TestBase{
     }
 
     @Test
-    public void logoutTest() throws IOException, ParseException {
+    public void userCanLogout() throws IOException, ParseException {
         homePage = new HomePage(page);
         String username = jsonReader.readJson("userLoginData.json","email");
         String password = jsonReader.readJson("userLoginData.json","password");
