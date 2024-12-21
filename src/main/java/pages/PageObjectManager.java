@@ -43,5 +43,7 @@ public class PageObjectManager {
         page.evaluate("selector => document.querySelector(selector).click()", selector);
     }
 
+    public boolean isElementVisible(String locator){
+        return page.isVisible(locator);
+    }
 }
-
