@@ -102,11 +102,11 @@ Example Test Code:
 
 ```java
 @Test
-public void verifyHomePageLoadsSuccessfully() {
-    Page page = browser.newPage();
-    page.navigate("https://www.demoblaze.com");
-    Assert.assertTrue(page.title().contains("STORE"));
-    page.close();
+public void userCanSignUpSuccessfully(){
+   homePage = new HomePage(page);
+   homePage.clickSignUpBtn();
+   homePage.fillUsernameAndPassword();
+   homePage.clickSignUpPopupBtn();
 }
 ```
 
