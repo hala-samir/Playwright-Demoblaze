@@ -20,6 +20,7 @@ public class HomePage extends PageObjectManager {
     private String logoutLocator= "#logout2";
     private String productLink = "//h4[@class='card-title']";
     private String cartPageLink = "//a[normalize-space()='Cart']";
+    private String contactLink = "//a[contains(text(),'Contact')]";
 
     public static ThreadLocal<String> productName = new ThreadLocal<>();
 
@@ -70,8 +71,14 @@ public class HomePage extends PageObjectManager {
         return productName.get().trim();
     }
 
+    // go to cart page
     public void clickCartPageLink(){
         clickButton(cartPageLink);
+    }
+
+    // go to contact page
+    public void clickContactLink(){
+        clickButton(contactLink);
     }
 
 }
