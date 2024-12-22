@@ -16,7 +16,7 @@ public class ProductsPage extends PageObjectManager {
 
     //go to the cart page
     public void clickAddToCartButton(){
-       clickButtonByJavaScript(addToCartButton);
+        clickButtonByJavaScript(addToCartButton);
     }
 
 }

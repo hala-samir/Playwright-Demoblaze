@@ -6,15 +6,20 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.PageObjectManager;
 
+import java.io.IOException;
+import java.util.Properties;
+
 public class TestBase {
     PlaywrightFactory playwrightFactory;
     Page page;
     PageObjectManager pageObjectManager;
+    Properties prop;
 
     @BeforeMethod
-    public void setUp(){
+    public void setUp() throws IOException {
         playwrightFactory = new PlaywrightFactory();
-        page = playwrightFactory.initBrowser("chrome");
+        prop = playwrightFactory.initializeTestConfigurations();
+        page = playwrightFactory.initBrowser(prop);
         pageObjectManager = new PageObjectManager(page);
     }
 

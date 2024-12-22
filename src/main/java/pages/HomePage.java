@@ -17,7 +17,7 @@ public class HomePage extends PageObjectManager {
     private String loginPopupBtnLocator = "//button[contains(text(),'Log in')]";
     private String usernameLoginFieldLocator = "#loginusername";
     private String passwordLoginFieldLocator = "#loginpassword";
-    private String logoutLocator= "#logout2";
+    private String logoutLocator = "#logout2";
     private String productLink = "//h4[@class='card-title']";
     private String cartPageLink = "//a[normalize-space()='Cart']";
     private String contactLink = "//a[contains(text(),'Contact')]";
@@ -28,35 +28,35 @@ public class HomePage extends PageObjectManager {
         super(page);
     }
 
-    public void clickSignUpBtn(){
-       clickButton(signUpBtnLocator);
+    public void clickSignUpBtn() {
+        clickButton(signUpBtnLocator);
     }
 
-    public void fillUsernameAndPassword(){
+    public void fillUsernameAndPassword() {
         fillTextField(usernameFieldLocator, username);
         fillTextField(passwordFieldLocator, password);
     }
 
-    public void clickSignUpPopupBtn(){
+    public void clickSignUpPopupBtn() {
         clickButton(signUpPopupBtnLocator);
     }
 
-    public void loginUsingCreatedAccount(String username, String password){
+    public void loginUsingCreatedAccount(String username, String password) {
         clickButton(loginBtnLocator);
         fillTextField(usernameLoginFieldLocator, username);
         fillTextField(passwordLoginFieldLocator, password);
         clickButton(loginPopupBtnLocator);
     }
 
-    public void clickLogoutButton(){
+    public void clickLogoutButton() {
         clickButton(logoutLocator);
     }
 
-    public void clickFirstProductLink(){
+    public void clickFirstProductLink() {
         clickFirstMatchedButton(productLink);
     }
 
-    public String getFirstProductLinkText(){
+    public String getFirstProductLinkText() {
         return getTextValue(productLink);
     }
 
@@ -72,12 +72,12 @@ public class HomePage extends PageObjectManager {
     }
 
     // go to cart page
-    public void clickCartPageLink(){
+    public void clickCartPageLink() {
         clickButton(cartPageLink);
     }
 
     // go to contact page
-    public void clickContactLink(){
+    public void clickContactLink() {
         clickButton(contactLink);
     }
 
