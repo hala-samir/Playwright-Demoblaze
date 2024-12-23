@@ -4,6 +4,7 @@ import com.microsoft.playwright.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 public class PlaywrightFactory {
@@ -17,18 +18,18 @@ public class PlaywrightFactory {
     private ThreadLocal<Playwright> playwrightThreadLocal = new ThreadLocal<>();
     private ThreadLocal<Browser> browserThreadLocal = new ThreadLocal<>();
     private ThreadLocal<BrowserContext> browserContextThreadLocal = new ThreadLocal<>();
-    private ThreadLocal<Page> pageThreadLocal = new ThreadLocal<>();
+    private static ThreadLocal<Page> pageThreadLocal = new ThreadLocal<>();
 
     //threadLocal variables getters
-    private Playwright getPlaywright(){
+    public Playwright getPlaywright(){
         return playwrightThreadLocal.get();
     }
 
-    private BrowserContext getBrowserContext() {
+    public BrowserContext getBrowserContext() {
         return browserContextThreadLocal.get();
     }
 
-    private Page getPage(){
+    public static Page getPage(){
         return pageThreadLocal.get();
     }
 
@@ -71,5 +72,11 @@ public class PlaywrightFactory {
         prop = new Properties();
         prop.load(fileIP);
         return prop;
+    }
+
+    public static String takeScreenshot(){
+        String path = System.getProperty("user.dir") + "\\screenshot\\" + System.currentTimeMillis() + ".png";
+        getPage().screenshot(new Page.ScreenshotOptions().setPath(Paths.get(path)).setFullPage(false));
+        return path;
     }
 }
