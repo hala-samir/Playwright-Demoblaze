@@ -9,14 +9,14 @@
             <class name="testScenarios.HomePageTest"></class>
         </classes>
     </test>
-<!--    <test name="Add to cart test scenarios">-->
-<!--        <classes>-->
-<!--            <class name="testScenarios.AddToCartTest"></class>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Contact us test scenarios">-->
-<!--        <classes>-->
-<!--            <class name="testScenarios.ContactUSTest"></class>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="Add to cart test scenarios">
+        <classes>
+            <class name="testScenarios.AddToCartTest"></class>
+        </classes>
+    </test>
+    <test name="Contact us test scenarios">
+        <classes>
+            <class name="testScenarios.ContactUSTest"></class>
+        </classes>
+    </test>
 </suite>
