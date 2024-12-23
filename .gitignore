@@ -46,6 +46,12 @@ build/
 # Compiled class file
 *.class
 
+#reports
+*.html
+*.png
+./reports
+./screenshot
+
 # Log file
 *.log
 
