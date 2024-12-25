@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  playwright-tests:
+    build:
+      context: .
+    container_name: playwrightpageobjectmodel-playwright-tests
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: mvn clean test -X
