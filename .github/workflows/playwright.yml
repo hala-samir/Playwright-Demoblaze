@@ -8,6 +8,8 @@ jobs:
   playwright:
     name: 'Playwright Tests'
     runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK }}
     container:
       image: mcr.microsoft.com/playwright/java:v1.49.0-noble
       options: --user 1001
@@ -17,7 +19,17 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+
       - name: Build & Install
         run: mvn -B install -D skipTests --no-transfer-progress
+
       - name: Run tests
         run: mvn test
+
+      - name: Notify Slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          channel: '#all-testingexecutionresult'
+          steps: ${{ toJson(steps) }}
+        if: always()
