@@ -33,8 +33,10 @@ public class PlaywrightFactory {
         return pageThreadLocal.get();
     }
 
+    // method for opening the correct browser
     public Page initBrowser(Properties prop) {
         String browserName= prop.getProperty("browserName");
+        System.out.println("The browser is "+ browserName);
         //playwright = Playwright.create();
         playwrightThreadLocal.set(Playwright.create());
         //condition to check the browser name that will launch
@@ -44,18 +46,17 @@ public class PlaywrightFactory {
                 browserThreadLocal.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setHeadless(Boolean.parseBoolean(prop.getProperty("headless").trim()))));
                 break;
             case "firefox":
-               // browser = playwright.firefox().launch(new BrowserType.LaunchOptions().setHeadless(Boolean.parseBoolean(prop.getProperty("headless").trim())));
+                // browser = playwright.firefox().launch(new BrowserType.LaunchOptions().setHeadless(Boolean.parseBoolean(prop.getProperty("headless").trim())));
                 browserThreadLocal.set(getPlaywright().firefox().launch(new BrowserType.LaunchOptions().setHeadless(Boolean.parseBoolean(prop.getProperty("headless").trim()))));
                 break;
             case "chromium":
-               // browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(Boolean.parseBoolean(prop.getProperty("headless").trim())));
+                // browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(Boolean.parseBoolean(prop.getProperty("headless").trim())));
                 browserThreadLocal.set(getPlaywright().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(Boolean.parseBoolean(prop.getProperty("headless").trim()))));
                 break;
             default:
                 System.out.println("Please, add a valid browser name");
                 break;
         }
-
         //browserContext = browser.newContext();
         browserContextThreadLocal.set(browserThreadLocal.get().newContext());
         //page = browserContext.newPage();
@@ -67,6 +68,7 @@ public class PlaywrightFactory {
         return getPage();
     }
 
+    // a method for preparing the properties files usage
     public Properties initializeTestConfigurations() throws IOException {
         FileInputStream fileIP= new FileInputStream("./src/test/java/resources/config/testConfig.properties");
         prop = new Properties();
@@ -74,6 +76,7 @@ public class PlaywrightFactory {
         return prop;
     }
 
+    // capture a screenshot for the page
     public static String takeScreenshot(){
         String path = System.getProperty("user.dir") + "\\screenshot\\" + System.currentTimeMillis() + ".png";
         getPage().screenshot(new Page.ScreenshotOptions().setPath(Paths.get(path)).setFullPage(false));

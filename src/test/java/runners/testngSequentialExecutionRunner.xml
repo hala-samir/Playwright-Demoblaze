@@ -6,17 +6,17 @@
     </listeners>
     <test name="Home page test scenarios">
         <classes>
-            <class name="testScenarios.HomePageTest"></class>
+            <class name="tests.HomePageTest"></class>
         </classes>
     </test>
     <test name="Add to cart test scenarios">
         <classes>
-            <class name="testScenarios.AddToCartTest"></class>
+            <class name="tests.AddToCartTest"></class>
         </classes>
     </test>
     <test name="Contact us test scenarios">
         <classes>
-            <class name="testScenarios.ContactUSTest"></class>
+            <class name="tests.ContactUSTest"></class>
         </classes>
     </test>
 </suite>
