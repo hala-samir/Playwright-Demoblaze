@@ -37,8 +37,4 @@ jobs:
           status: ${{ job.status }}
           channel: '#all-testingexecutionresult'
           steps: ${{ toJson(steps) }}
-
-      - if: always()
-        uses: actions/upload-artifcat@master
-        with: HTML-ExecutionReport.html
-        path: ./reports
+        if: always()
