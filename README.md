@@ -1,22 +1,47 @@
 # Playwright-Demoblaze
 
-This repository demonstrates the use of **Playwright** for automating tests on the [Demoblaze](https://www.demoblaze.com/) web application.
-It includes automation scripts written in Java, showcasing Playwright's capabilities for modern web automation testing.
+This project uses Playwright for end-to-end UI automation testing of the Demoblaze e-commerce website.
+It is built using the Page Object Model (POM) design pattern, integrated with TestNG for test execution and Maven for dependency management.
+
+## Technologies Used
+
+- **Playwright:** A Node.js library for browser automation, supporting multiple browsers.
+- **TestNG:** A testing framework for managing and executing test cases.
+- **Java 17:** The programming language used for scripting.
+- **Maven:** Build automation tool for dependency and lifecycle management.
+- **Docker:** Containerization for isolated test execution.
+- **GitHub Actions:** CI/CD integration for automated test execution.
+- **ExtentReports:** For generating detailed HTML test report.
+- **Faker:** Dynamic data generation for tests.
 
 ## Features
 
-- Automated test cases for the **Demoblaze** e-commerce platform.
-- **Playwright** integration with Java for browser-based testing.
-- Modular and reusable test structure.
-- Cross-browser testing support (Chromium, Firefox, and WebKit).
+- **Playwright for Java:** Ensures reliable and scalable end-to-end UI testing.
+- **Page Object Model (POM):** Modular design for reusable and maintainable test code.
+- **Data-Driven Testing:** Dynamic test execution with parameterized data.
+- **Faker Library:** Generates realistic, randomized test data like names, emails, and passwords to mimic real-world scenarios.
+- **CI/CD Integration:**
+    **GitHub Actions:** Automatically runs tests on pull requests and code pushes to main or master.
+    **Slack Notifications:** Sends test execution results to a dedicated Slack channel.
 
 ## Prerequisites
 
 Ensure you have the following installed:
 
 - **Java Development Kit (JDK)** 17 or higher.
+
+```
+ java -version
+```
+
 - **Maven** (for dependency management).
-- **Node.js** (to install Playwright browsers).
+
+```
+ mvn -v
+```
+
+- **Docker** (Optional for containerized execution)
+  Install Docker and Docker Compose for running tests in an isolated environment.
 
 ## Setup Instructions
 
@@ -29,74 +54,72 @@ git clone https://github.com/hala-samir/Playwright-Demoblaze.git
 cd Playwright-Demoblaze
 ```
 
-### 2. Install Playwright Browsers
+### 2. Run Tests Locally
 
-Run the following command to install the required Playwright browsers:
-
-```bash
-npx playwright install
+Build the project and execute tests:
+```
+mvn clean test
 ```
 
-### 3. Import the Project in an IDE
-
-- Open your preferred Java IDE (e.g., IntelliJ IDEA or Eclipse).
-- Import the project as a **Maven Project**.
-
-### 4. Run the Tests
-
-Use Maven to execute the test cases:
-
-```bash
-mvn test
+### 3. Run Tests in Docker
+```
+docker-compose up --build
 ```
 
-Alternatively, you can run individual test classes or methods directly from your IDE.
+### 4. View Test Reports
+
+After test execution, reports are generated in the target/surefire-reports directory (TestNG Report).
+
+To view ExtentReports, reports are generated in under ./reports.
 
 ## Project Structure
 
 ```
-Playwright-Demoblaze
-├── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── [application-specific code]
-│   └── test
-│       ├── java
-│       │   ├── tests
-│       │   │   └── [test classes]
-│       │   └── utils
-│       │       └── [helper methods and utilities]
+Playwright-Demoblaze/
+├── .github/
+│   ├── workflows/
+│       └── playwright-tests.yml
+├── src/
+│   ├── main/
+│   │   └── java/
+│   │       └── pages/
+│   ├── test/
+│       └── java/
+│           └── tests/
+├── target/
+│   └── surefire-reports/
+├── Dockerfile
+├── docker-compose.yml
 ├── pom.xml
-└── README.md
+├── README.md
+└── .gitignore
 ```
 
-- **`src/main/java`**: Contains application-specific code (if any).
-- **`src/test/java`**: Contains test cases and utilities.
-- **`pom.xml`**: Maven configuration file for managing dependencies.
 
-## Key Dependencies
+##  Continuous Integration with GitHub Actions
 
-The project uses the following dependencies:
+* Tests are automatically executed on push and pull_request events for main and master branches. 
+* Test results are sent to a Slack channel (#all-testingexecutionresult) via webhook integration.
 
-- **Playwright for Java**: Web automation framework.
-- **TestNG/JUnit**: Test framework (choose based on the implementation).
-- Additional dependencies can be found in the `pom.xml` file.
+## Test Reports
 
-## Playwright Features Used
+* HTML Reports: Generated using ExtentReports and available in the target directory after test execution.
+* Surefire Reports: Located at target/surefire-reports for detailed logs.
 
-- Browser and context management.
-- Handling dynamic elements and asynchronous events.
-- Cross-browser testing (Chromium, Firefox, WebKit).
-- Emulating devices for responsive testing (optional).
+## Key Advantages
+* Flexible & Scalable: Thanks to POM and data-driven testing.
+* Realistic Data: Ensures tests mimic real-world scenarios using the Faker library.
+* Seamless CI/CD: Fully integrated with GitHub Actions and Slack for efficient workflows.
 
 ## Writing and Running Tests
 
 1. **Test Location**:
-    - All test classes are located in `src/test/java/tests`.
 
+   - All test classes are located in `src/test/java/tests`.
 2. **Adding a New Test**:
-    - Create a new test class under `tests`.
-    - Use Playwright APIs to automate the desired flows.
+
+   - Create a new test class under `tests`.
+   - Use Playwright APIs to automate the desired flows.
 
 Example Test Code:
 
@@ -109,7 +132,3 @@ public void userCanSignUpSuccessfully(){
    homePage.clickSignUpPopupBtn();
 }
 ```
-
-3. **Running Tests**:
-    - Use `mvn test` to execute all tests.
-    - Use IDE options to run specific test methods or classes.
