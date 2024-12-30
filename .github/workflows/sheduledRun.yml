@@ -1,10 +1,8 @@
-name: Playwright Tests
+name: The scheduled run of the Playwright Tests
 # this workflow will be run on pushing and on pulling code to the main branch
 on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+  schedule:
+    - cron: '0 23 * * *'
 jobs:
   playwright: #job name
     name: 'Playwright Tests'
