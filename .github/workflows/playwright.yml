@@ -1,15 +1,16 @@
 name: Playwright Tests
+# this workflow will be run on pushing and on pulling code to the main branch
 on:
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
 jobs:
-  playwright:
+  playwright: #job name
     name: 'Playwright Tests'
     runs-on: ubuntu-latest
     env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK }} #slack config
     container:
       image: mcr.microsoft.com/playwright/java:v1.49.0-noble
       options: --user 1001
@@ -20,12 +21,15 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Build & Install
-        run: mvn -B install -D skipTests --no-transfer-progress
+        #step 1 maven installation
+      - name: Install maven
+        run: mvn install
 
+        #step2 run the tests
       - name: Run tests
         run: mvn test
 
+        #step3 send notification to slack channel "testingExecutionResult"
       - name: Notify Slack
         uses: act10ns/slack@v2
         with:
