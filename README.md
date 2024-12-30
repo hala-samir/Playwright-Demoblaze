@@ -1,5 +1,4 @@
-# Playwright-Demoblaze  [![Playwright Tests](https://github.com/hala-samir/Playwright-Demoblaze/actions/workflows/playwright.yml/badge.svg)](https://github.com/hala-samir/Playwright-Demoblaze/actions/workflows/playwright.yml)
-[![The scheduled run of the Playwright Tests](https://github.com/hala-samir/Playwright-Demoblaze/actions/workflows/sheduledRun.yml/badge.svg)](https://github.com/hala-samir/Playwright-Demoblaze/actions/workflows/sheduledRun.yml)
+# Playwright-Demoblaze  [![Playwright Tests](https://github.com/hala-samir/Playwright-Demoblaze/actions/workflows/playwright.yml/badge.svg)](https://github.com/hala-samir/Playwright-Demoblaze/actions/workflows/playwright.yml) [![The scheduled run of the Playwright Tests](https://github.com/hala-samir/Playwright-Demoblaze/actions/workflows/sheduledRun.yml/badge.svg)](https://github.com/hala-samir/Playwright-Demoblaze/actions/workflows/sheduledRun.yml)
 This project uses Playwright for end-to-end UI automation testing of the Demoblaze e-commerce website.
 It is built using the Page Object Model (POM) design pattern, integrated with TestNG for test execution and Maven for dependency management.
 
