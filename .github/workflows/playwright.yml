@@ -12,8 +12,8 @@ jobs:
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK }} #slack config
     container:
-      image: mcr.microsoft.com/playwright/java:v1.49.0-noble
-      options: --user 1001
+      image: ubuntu:latest
+      options: --user root
 
     steps:
       #actions
