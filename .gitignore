@@ -49,7 +49,6 @@ build/
 *.class
 
 #reports
-*.html
 *.png
 ./screenshot
 

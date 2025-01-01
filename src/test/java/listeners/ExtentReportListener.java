@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 import static com.demoblaze.PlaywrightFactory.takeScreenshot;
 
 public class ExtentReportListener implements ITestListener {
-    private static final String OUTPUT_FOLDER = "./reports";
+    private static final String OUTPUT_FOLDER = "src/test/reports";
     private static final String REPORT_FILE_NAME = "HTML-ExecutionReport.html";
 
     private static ExtentReports extent = init();

@@ -69,7 +69,7 @@ docker-compose up --build
 
 After test execution, reports are generated in the target/surefire-reports directory (TestNG Report).
 
-To view ExtentReports, reports are generated in under ./reports.
+To view ExtentReports, reports are generated in under ./report.
 
 ## Project Structure
 
