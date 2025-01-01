@@ -51,7 +51,6 @@ build/
 #reports
 *.html
 *.png
-./reports
 ./screenshot
 
 # Log file
