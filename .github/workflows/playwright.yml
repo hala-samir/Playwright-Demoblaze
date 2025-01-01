@@ -30,7 +30,7 @@ jobs:
       - name: Run tests
         run: mvn test
 
-       #step3 generate the extent report
+      #step3 generate the extent report
       - name: Upload Extent Report
         uses: actions/upload-artifact@v3
         with:
@@ -39,6 +39,7 @@ jobs:
 
         #step4 send notification to slack channel "testingExecutionResult"
       - name: Notify Slack
+        if: always()
         uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
