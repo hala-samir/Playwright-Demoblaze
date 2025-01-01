@@ -1,50 +1,53 @@
 name: Playwright Tests
-# this workflow will be run on pushing and on pulling code to the main branch
+# This workflow will be run on pushing and on pulling code to the main branch
 on:
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+
 jobs:
-  playwright: #job name
+  playwright:
     name: 'Playwright Tests'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use GitHub-hosted runner for better compatibility
     env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK }} #slack config
-    container:
-      image: mcr.microsoft.com/playwright/java:v1.49.0-noble
-      options: --user 1001
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}  # Add your Slack Bot Token to GitHub secrets
+      SLACK_CHANNEL: '#all-testingexecutionresult'  # Replace with your Slack channel name
+
     steps:
-      #actions
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v3
+      # Step 1: Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Java
+      - name: Set up Java
+        uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      #step0: install curl
+      # Step 3: Install curl in the runner
       - name: Install curl
-        run: |
-         apt-get update && apt-get install -y curl
+        run: sudo apt-get update && sudo apt-get install -y curl
 
-        #step 1 maven installation
-      - name: Install maven
+      # Step 4: Install Maven dependencies
+      - name: Install Maven Dependencies
         run: mvn install
 
-        #step2 run the tests
-      - name: Run tests
+      # Step 5: Run Playwright tests
+      - name: Run Tests
         run: mvn test
 
-       #step3 generate the extent report
+      # Step 6: Upload the Extent Report as an artifact
       - name: Upload Extent Report
         uses: actions/upload-artifact@v3
         with:
           name: extent-report
           path: src/test/reports/HTML-ExecutionReport.html
 
-        #step 4 send notification to slack channel "testingExecutionResult"
-      - name: Notify Slack
-        if: always()
+      # Step 7: Upload the Extent HTML report to Slack
+      - name: Upload Extent Report to Slack
+        if: always()  # Ensure this runs even if tests fail
         run: |
           # Ensure the Extent report exists
           if [ -f "src/test/reports/HTML-ExecutionReport.html" ]; then
