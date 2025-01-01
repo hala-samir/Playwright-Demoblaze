@@ -40,15 +40,15 @@ jobs:
         #step4 send notification to slack channel "testingExecutionResult"
       - name: Notify Slack
         if: always()
-        uses: act10ns/slack@v2
-        with:
-          status: ${{ job.status }}
-          channel: '#all-testingexecutionresult'
-          steps: ${{ toJson(steps) }}
-
-          run: |
+        run: |
+          # Ensure the Extent report exists
+          if [ -f "src/test/reports/HTML-ExecutionReport.html" ]; then
+            # Upload the Extent HTML report to Slack
             curl -F file=@src/test/reports/HTML-ExecutionReport.html \
                  -F "initial_comment=Playwright Tests completed. Here is the Extent Report." \
                  -F channels=${{ env.SLACK_CHANNEL }} \
                  -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
                  https://slack.com/api/files.upload
+          else
+            echo "Extent report not found. Skipping upload."
+          fi
