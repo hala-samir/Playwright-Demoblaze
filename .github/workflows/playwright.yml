@@ -39,7 +39,7 @@ jobs:
 
       # Step 4 Install curl
       - name: Install curl
-        run: sudo apt-get install curl
+        run: apt-get update && apt-get install -y curl
 
         #step 5 send notification to slack channel "testingExecutionResult"
       - name: Notify Slack
