@@ -44,11 +44,3 @@ jobs:
           status: ${{ job.status }}
           channel: '#all-testingexecutionresult'
           steps: ${{ toJson(steps) }}
-
-      - name: Upload to slack step
-        uses: act10ns/slack@v2
-        with:
-          status: ${{ job.status }}
-          token: ${{ secrets.SLACK_TOKEN }}
-          path: reports/HTML-ExecutionReport.html
-          channel: '#all-testingexecutionresult'
