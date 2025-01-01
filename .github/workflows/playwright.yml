@@ -22,6 +22,11 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      #step0: install curl
+      - name: Install curl
+        run: |
+         apt-get update && apt-get install -y curl
+
         #step 1 maven installation
       - name: Install maven
         run: mvn install
@@ -37,11 +42,7 @@ jobs:
           name: extent-report
           path: src/test/reports/HTML-ExecutionReport.html
 
-      # Step 4 Install curl
-      - name: Install curl
-        run: apt-get update && apt-get install -y curl
-
-        #step 5 send notification to slack channel "testingExecutionResult"
+        #step 4 send notification to slack channel "testingExecutionResult"
       - name: Notify Slack
         if: always()
         run: |
