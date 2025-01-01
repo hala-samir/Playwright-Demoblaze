@@ -37,7 +37,11 @@ jobs:
           name: extent-report
           path: src/test/reports/HTML-ExecutionReport.html
 
-        #step4 send notification to slack channel "testingExecutionResult"
+      # Step 4 Install curl
+      - name: Install curl
+        run: sudo apt-get install curl
+
+        #step 5 send notification to slack channel "testingExecutionResult"
       - name: Notify Slack
         if: always()
         run: |
