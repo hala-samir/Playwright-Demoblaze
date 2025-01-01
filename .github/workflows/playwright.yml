@@ -34,14 +34,14 @@ jobs:
       - name: Upload Extent Report
         uses: actions/upload-artifact@v3
         with:
-            name: extent-report
-            path: reports/HTML-ExecutionReport.html
+          name: extent-report
+          path: reports/HTML-ExecutionReport.html
 
         #step4 send notification to slack channel "testingExecutionResult"
       - name: Notify Slack
+        if: always()
         uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
           channel: '#all-testingexecutionresult'
           steps: ${{ toJson(steps) }}
-          if: always()
