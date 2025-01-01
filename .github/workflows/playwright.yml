@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: extent-report
-          path: reports/HTML-ExecutionReport.html
+          path: src/test/reports/HTML-ExecutionReport.html
 
         #step4 send notification to slack channel "testingExecutionResult"
       - name: Notify Slack
