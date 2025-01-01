@@ -45,3 +45,16 @@ jobs:
           status: ${{ job.status }}
           channel: '#all-testingexecutionresult'
           steps: ${{ toJson(steps) }}
+
+          run: |
+            # Ensure the report exists
+            if [ -f "src/test/reports/HTML-ExecutionReport.html" ]; then
+              # Upload the TestNG HTML report to Slack
+              curl -F file=@src/test/reports/HTML-ExecutionReport.html \
+                   -F "initial_comment=TestNG HTML Report for Playwright Tests" \
+                   -F channels=${{ env.SLACK_CHANNEL }} \
+                   -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+                    https://slack.com/api/files.upload
+            else
+              echo "TestNG report not found. Skipping upload."
+            fi
