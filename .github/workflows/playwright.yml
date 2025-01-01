@@ -12,9 +12,8 @@ jobs:
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK }} #slack config
     container:
-      image: ubuntu:latest
-      options: --user root
-
+      image: mcr.microsoft.com/playwright/java:v1.49.0-noble
+      options: --user 1001
     steps:
       #actions
       - uses: actions/checkout@v4
@@ -22,10 +21,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-
-      #step0: install curl
-      - name: Install curl
-        run: sudo apt-get update && sudo apt-get install -y curl
 
         #step 1 maven installation
       - name: Install maven
@@ -40,20 +35,19 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: extent-report
-          path: src/test/reports/HTML-ExecutionReport.html
+          path: reports/HTML-ExecutionReport.html
 
-        #step 4 send notification to slack channel "testingExecutionResult"
-      - name: Upload Extent Report to Slack
-        if: always()  # Ensure this runs even if tests fail
-        run: |
-          # Ensure the Extent report exists
-          if [ -f "src/test/reports/HTML-ExecutionReport.html" ]; then
-            # Upload the Extent HTML report to Slack
-            curl -F file=@src/test/reports/HTML-ExecutionReport.html \
-                 -F "initial_comment=Playwright Tests completed. Here is the Extent Report." \
-                 -F channels=${{ env.SLACK_CHANNEL }} \
-                 -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
-                 https://slack.com/api/files.upload
-          else
-            echo "Extent report not found. Skipping upload."
-          fi
+        #step4 send notification to slack channel "testingExecutionResult"
+      - name: Notify Slack
+        uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          channel: '#all-testingexecutionresult'
+          steps: ${{ toJson(steps) }}
+
+      - name: Upload to slack step
+        uses: act10ns/slack@v2
+        with:
+          token: ${{ secrets.SLACK_TOKEN }}
+          path: reports/HTML-ExecutionReport.html
+          channel: '#all-testingexecutionresult'
