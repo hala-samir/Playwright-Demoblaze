@@ -1,5 +1,6 @@
 name: The scheduled run of the Playwright Tests
 # this workflow will be run on pushing and on pulling code to the main branch
+#cron job
 on:
   schedule:
     - cron: '0 23 * * *'
