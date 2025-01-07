@@ -29,7 +29,14 @@ jobs:
       - name: Run tests
         run: mvn test
 
-        #step3 send notification to slack channel "testingExecutionResult"
+       #step3 generate the extent report
+      - name: Upload Extent Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: extent-report
+          path: src/test/reports/HTML-ExecutionReport.html
+
+        #step4 send notification to slack channel "testingExecutionResult"
       - name: Notify Slack
         uses: act10ns/slack@v2
         with:
