@@ -108,7 +108,7 @@ Playwright-Demoblaze/
 ## Key Advantages
 * Flexible & Scalable: Thanks to POM and data-driven testing.
 * Realistic Data: Ensures tests mimic real-world scenarios using the Faker library.
-* Seamless CI/CD: Fully integrated with GitHub Actions and Slack for efficient workflows.
+* Seamless CI/CD: Fully integrated with GitHub Actions and Slack for efficient workflows. The workflows can generate artifacts that include the execution test report.
 
 ## Writing and Running Tests
 
